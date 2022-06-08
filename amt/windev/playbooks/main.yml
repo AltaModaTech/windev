@@ -1,0 +1,12 @@
+---
+
+- name: Use amt.windev playbook to output a variable
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    # - ansible.builtin.ping
+
+    - name: DebugList
+      debug:
+        var: alist
