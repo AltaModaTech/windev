@@ -1,12 +1,7 @@
-# Vagrant & Ansible Collection for Windows Development
+# windev
+Ansible playbook collection for Windows develpment
 
-## Usage
 
-- Set new VBox name (vb.name in vbox section of Vagrantfile)
-- Create the VBox and invoke Ansible afterwards
+## Run it
 
-    `vagrant up`
-
-- Create the VBox _without_ Ansible provisioner
- 
-    `vagrant up --no-provision`
+`ansible-playbook playbooks/main.yml`
