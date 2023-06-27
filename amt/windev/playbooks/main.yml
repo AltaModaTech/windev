@@ -1,12 +1,45 @@
 ---
 
-- name: Use amt.windev playbook to output a variable
+- name: Configure with Ansible
   hosts: all
-  gather_facts: false
+  # vars:
+  #   # ansible_connection: winrm 
+  #   ansible_connection: ssh
+  #   ansible_host: win10jun23.lan
+  #   # ansible_port: 55985
+  #   ansible_port: 22
+  #   ansible_user: 'vagrant'
+  #   ansible_password: 'vagrant'
+  #   # ansible_winrm_transport: basic
+  #   # ansible_winrm_port: 5985
+  #   # ansible_winrm_server_cert_validation: ignore
+  #   ansible_become: true
+
+  # connection: local
+  gather_facts: true
 
   tasks:
-    # - ansible.builtin.ping
+    - name: Print ansible facts
+      ansible.builtin.debug:
+        var: ansible_facts
 
-    - name: DebugList
-      debug:
-        var: alist
+    - name: Print OS type
+      ansible.builtin.debug:
+        var: ansible_distribution
+
+    - name: Install dev tools
+      win_chocolatey:
+        name: 
+        - git
+        - vscode
+        - procexp
+        state: present
+
+    # Admin installations
+    # - name: Install Windows Terminal & PowerShell Core
+    #   win_chocolatey:
+    #     name: 
+    #     - microsoft-windows-terminal
+    #     - powershell-core
+    #     become: yes
+    #     state: present
