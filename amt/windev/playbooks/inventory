@@ -1,20 +1,25 @@
 [defaults]
-# host_key_checking=false
+; host_key_checking=false
 
 [windows]
-win10jun23.lan
+Win10Aug23.amt.local
+
 
 
 [windows:vars]
+become_method=runas
 ansible_shell_type=cmd
 shell_type=cmd
+; ansible_shell_type=powershell
+; shell_type=powershell
 #
 # ansible_become_method=runas
 # ansible_become_user="{{ ansible_user }}"
 #
 ansible_user=vagrant
 ansible_password=vagrant
-; # ansible_connection=ssh
+ansible_connection=ssh
+; ansible_port=17428
 #
 ; ansible_connection=winrm
 ; ansible_port=5986

@@ -2,21 +2,15 @@
 
 - name: Configure with Ansible
   hosts: all
-  # vars:
-  #   # ansible_connection: winrm 
-  #   ansible_connection: ssh
-  #   ansible_host: win10jun23.lan
-  #   # ansible_port: 55985
-  #   ansible_port: 22
-  #   ansible_user: 'vagrant'
-  #   ansible_password: 'vagrant'
-  #   # ansible_winrm_transport: basic
-  #   # ansible_winrm_port: 5985
-  #   # ansible_winrm_server_cert_validation: ignore
-  #   ansible_become: true
+  vars:
+    ansible_user: 'vagrant'
+    ansible_password: 'vagrant'
 
   # connection: local
-  gather_facts: true
+  # gather_facts: false
+
+  # pre_tasks:
+  #   - debug: var=ansible_version
 
   tasks:
     - name: Print ansible facts
@@ -32,14 +26,21 @@
         name: 
         - git
         - vscode
-        - procexp
         state: present
 
-    # Admin installations
-    # - name: Install Windows Terminal & PowerShell Core
-    #   win_chocolatey:
-    #     name: 
-    #     - microsoft-windows-terminal
-    #     - powershell-core
-    #     become: yes
-    #     state: present
+    - name: Install browsers
+      win_chocolatey:
+        name: 
+        - googlechrome
+        - firefox
+        - brave
+        state: present
+
+    # Admin installations (note: become is not necessary b/c vagrant is admin)
+    - name: Install Windows Terminal & PowerShell Core
+      win_chocolatey:
+        name: 
+        - microsoft-windows-terminal
+        - powershell-core
+        - sysinternals
+        state: present
