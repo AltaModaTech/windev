@@ -1,6 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Use libvirt on Linux hosts
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -38,6 +41,7 @@ Vagrant.configure("2") do |config|
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
+  config.vm.network :forwarded_port, guest: 22, host: 17422
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -78,6 +82,12 @@ Vagrant.configure("2") do |config|
   # SHELL
 
   config.vm.provision "ansible" do |a|
-    a.playbook="./windev/playbooks/main.yml"
+    a.compatibility_mode = "2.0"
+    a.verbose = 'vvv'
+
+    a.playbook = "./windev/playbooks/main.yml"
+    a.inventory_path = "./windev/playbooks/inventory"
+    a.limit = "all"
+
   end
 end
