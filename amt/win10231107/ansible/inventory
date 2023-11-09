@@ -1,0 +1,32 @@
+[defaults]
+;; setting host key checking here doesn't seem to work
+; host_key_checking=false
+
+[windows]
+Win10231107.amt.local
+
+
+
+[windows:vars]
+become_method=runas
+ansible_shell_type=cmd
+shell_type=cmd
+; ansible_shell_type=powershell
+; shell_type=powershell
+#
+ansible_become_method=runas
+# ansible_become_user="{{ ansible_user }}"
+#
+ansible_user=vagrant
+ansible_password=vagrant
+ansible_connection=ssh
+; ansible_port=17428
+#
+; ansible_connection=winrm
+; ansible_port=5986
+; ansible_winrm_scheme=https
+; ansible_winrm_server_cert_validation=ignore
+; ansible_winrm_kerberos_delegation=true
+#
+# ansible_winrm_transport=basic
+# ansible_winrm_message_encryption=auto

@@ -24,6 +24,9 @@
     - Copy previous Vagrantfile to this new folder
     - Edit Vagrantfile
       - 'config.vm.hostname' to match the folder name convention
+    - Create ansible folder and
+      - Copy inventory file from previous month (or windev/playbooks)
+      - Change target machine name in windows section of inventory
 - Have Vagrant create the VM
   
   `vagrant up` or `vagrant up --no-provision`
@@ -34,6 +37,8 @@
   - Rename guest VM appro'ly
 - Shutdown VM
   - Change network to bridged over a host NIC
+  - Enable bidi cut & paste
+  - Take snapshot!
 - Start VM
 - Accept network discovery
 - If created from ISO
@@ -42,13 +47,13 @@
 
 ### Auto install & config
 
-- Update guest VM hostname in Ansible inventory (../playbook/inventory)
 - Ansible-playbook
 
-  `ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook ../windev/playbooks/main.yml -i ../windev/playbooks/inventory`
+  `ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook ../windev/playbooks/main.yml -i ./ansible/inventory`
 
 ### Manual configs
 
+- Change vagrant's password
 - Install Winget using Store app
 - Install VBox Guest Additions
 - Start and config procexp
@@ -62,19 +67,20 @@
 
 ### 08/23/2023
 
-- Added How To section at top
-- 
+- Added How To section at tope
+
+### 11/07/2023
+- Created amt/win10231107 for new VM & followed instructions above
+  - [Create VM w/Vagrant](#creating-from-vagrant-box)
+  - [Modify the VM](#modify-the-vm)
+  - [Auto install with Ansible](#auto-install--config)
+  - [Manual configs](#manual-configs)
+- Changed vagrant's pswd
+- All Windows and winget updates
 
 ## TODO
-- VM config
-  - bidi clipboard
 - After VM is running
-  - Install winget
-  - Use winget to install
-  - Install Gists
-    - Devtools
-    - Browsers
-
+  - Run Remove-DefaultWin10Apps.ps1 [Gist](https://gist.github.com/jburnett)
 
 - Other
   - When to create user & change vagrant's pswd?
